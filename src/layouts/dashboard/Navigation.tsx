@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { RiDashboardFill, RiLockStarFill } from "react-icons/ri";
 import { BiSolidPurchaseTag } from "react-icons/bi";
 import { AiFillSetting } from "react-icons/ai";
-import { useSelectedLayoutSegment } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
@@ -26,7 +26,7 @@ export function NavigationSheet({
 }
 
 export default function Navigation({ className, ...props }: NavigationProps) {
-  const selectedLayoutSegment = useSelectedLayoutSegment();
+  const pathname = usePathname();
   return (
     <nav className={cn("bg-layout min-w-[300px] h-full", className)} {...props}>
       <ul className="pt-24 px-7 space-y-1">
@@ -34,7 +34,7 @@ export default function Navigation({ className, ...props }: NavigationProps) {
           <Button
             className={cn(
               "w-full justify-start text-[#AEB9E1] relative overflow-hidden",
-              selectedLayoutSegment === null &&
+              pathname === "/" &&
                 "bg-[#040415] text-white before:absolute before:w-[3.19px] before:top-0 before:left-0 before:h-full before:bg-[#2F5ED2]"
             )}
             variant="ghost"
@@ -43,9 +43,7 @@ export default function Navigation({ className, ...props }: NavigationProps) {
             <Link href="/">
               <RiDashboardFill
                 size={20}
-                className={cn(
-                  selectedLayoutSegment === null && "text-[#2F5ED2]"
-                )}
+                className={cn(pathname === "/" && "text-[#2F5ED2]")}
               />
               <span className="ml-[6px]">Dashboard</span>
             </Link>
@@ -55,18 +53,17 @@ export default function Navigation({ className, ...props }: NavigationProps) {
           <Button
             className={cn(
               "w-full justify-start text-[#AEB9E1] relative overflow-hidden",
-              selectedLayoutSegment === "purchase-license" &&
+              pathname === "/license/purchase" &&
                 "bg-[#040415] text-white before:absolute before:w-[3.19px] before:top-0 before:left-0 before:h-full before:bg-[#2F5ED2]"
             )}
             variant="ghost"
             asChild
           >
-            <Link href="/purchase-license">
+            <Link href="/license/purchase">
               <BiSolidPurchaseTag
                 size={20}
                 className={cn(
-                  selectedLayoutSegment === "purchase-license" &&
-                    "text-[#2F5ED2]"
+                  pathname === "/license/purchase" && "text-[#2F5ED2]"
                 )}
               />
               <span className="ml-[6px]">Purchase License Keys</span>
@@ -77,17 +74,17 @@ export default function Navigation({ className, ...props }: NavigationProps) {
           <Button
             className={cn(
               "w-full justify-start text-[#AEB9E1] relative overflow-hidden",
-              selectedLayoutSegment === "purchase-license" &&
+              pathname === "/license/manage" &&
                 "bg-[#040415] text-white before:absolute before:w-[3.19px] before:top-0 before:left-0 before:h-full before:bg-[#2F5ED2]"
             )}
             variant="ghost"
             asChild
           >
-            <Link href="/manage-license">
+            <Link href="/license/manage">
               <AiFillSetting
                 size={20}
                 className={cn(
-                  selectedLayoutSegment === "manage-license" && "text-[#2F5ED2]"
+                  pathname === "/license/manage" && "text-[#2F5ED2]"
                 )}
               />
               <span className="ml-[6px]">Manage License Keys</span>
@@ -98,7 +95,7 @@ export default function Navigation({ className, ...props }: NavigationProps) {
           <Button
             className={cn(
               "w-full justify-start text-[#AEB9E1] relative overflow-hidden",
-              selectedLayoutSegment === "purchase-license" &&
+              pathname === "/claim" &&
                 "bg-[#040415] text-white before:absolute before:w-[3.19px] before:top-0 before:left-0 before:h-full before:bg-[#2F5ED2]"
             )}
             variant="ghost"
@@ -107,9 +104,7 @@ export default function Navigation({ className, ...props }: NavigationProps) {
             <Link href="/claim">
               <RiLockStarFill
                 size={20}
-                className={cn(
-                  selectedLayoutSegment === "claim" && "text-[#2F5ED2]"
-                )}
+                className={cn(pathname === "/claim" && "text-[#2F5ED2]")}
               />
               <span className="ml-[6px]">Claim</span>
             </Link>
