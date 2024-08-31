@@ -3,17 +3,14 @@ import { aeonikFontFamily } from "./src/theme/font-families";
 
 const config: Config = {
   darkMode: ["class"],
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "node-texture": "url('/images/bg-node-texture.png')",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -30,6 +27,10 @@ const config: Config = {
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
+        },
+        layout: {
+          DEFAULT: "hsla(240, 33%, 9%, 1)",
+          foreground: "hsla(0, 0%, 100%, 1)",
         },
         primary: {
           DEFAULT: "hsl(var(--primary))",
