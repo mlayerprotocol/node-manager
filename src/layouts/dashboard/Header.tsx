@@ -4,9 +4,9 @@ import logoImage from "@/assets/images/logo.png";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { IoMdMenu } from "react-icons/io";
 import { NavigationSheet } from "./Navigation";
+import ConnectWalletButton from "@/components/ui/ConnectWalletButton";
 
 type HeaderProps = React.ComponentProps<"header">;
 
@@ -34,26 +34,14 @@ export default function Header({ className, ...props }: HeaderProps) {
           </h1>
         </div>
         <div className="flex items-center gap-x-3">
-          <Button className="rounded-full w-[142px] hidden lg:inline-flex">
+          {/* <Button className="rounded-full w-[142px] hidden lg:inline-flex">
             KYC
-          </Button>
-          <Button className="rounded-full hidden lg:inline-flex">
-            Connect Wallet
-          </Button>
-
-          <Button
-            className="bg-[#1F1F2C] border-[#28303F] rounded-full gap-1"
-            variant="secondary"
-          >
-            <Avatar className="w-6 h-6">
-              <AvatarFallback className="bg-[#2F5ED2] rounded-full text-white">
-                K
-              </AvatarFallback>
-            </Avatar>
-            <span className="font-bold text-sm hidden lg:inline">
-              cosm***xk3u
-            </span>
-          </Button>
+          </Button> */}
+          <ConnectWalletButton
+            buttonClassNames={{
+              disconnected: "rounded-full hidden lg:inline-flex",
+            }}
+          />
 
           <NavigationSheet
             trigger={
