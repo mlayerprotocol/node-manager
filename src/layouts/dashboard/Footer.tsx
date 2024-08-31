@@ -13,7 +13,7 @@ export default function Footer({ className, ...props }: FooterProps) {
     <div className="bg-layout relative">
       <footer
         className={cn(
-          "flex flex-col gap-14 lg:grid lg:grid-cols-4 px-7 py-14 mx-auto lg:mr-0 container",
+          "flex flex-col gap-14 lg:grid lg:grid-cols-4 px-7 py-14 mx-auto lg:mr-0 xl:pr-20 container",
           className
         )}
         {...props}

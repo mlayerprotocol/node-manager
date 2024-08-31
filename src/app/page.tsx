@@ -1,3 +1,5 @@
+import DashboardContainer from "@/modules/dashboard/containers/DashboardContainer";
+
 export default function Home() {
-  return <main>Hello MLayer!</main>;
+  return <DashboardContainer />;
 }

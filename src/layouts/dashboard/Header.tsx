@@ -15,7 +15,7 @@ export default function Header({ className, ...props }: HeaderProps) {
     <div className="bg-layout relative">
       <header
         className={cn(
-          "pt-9 pb-5 px-7 flex items-center justify-between container mx-auto lg:mr-0",
+          "pt-9 pb-5 px-7 flex items-center justify-between container mx-auto lg:mr-0 xl:pr-20",
           className
         )}
         {...props}

@@ -11,6 +11,7 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "node-texture": "url('/images/bg-node-texture.png')",
+        "gradient-texture": "url(/images/bg-gradient-texture.jpeg)",
       },
       borderRadius: {
         lg: "var(--radius)",

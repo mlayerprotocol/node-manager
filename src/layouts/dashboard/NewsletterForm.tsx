@@ -21,7 +21,7 @@ export default function NewsletterForm() {
             control={control}
             name="email"
             render={({ field }) => (
-              <FormItem {...field}>
+              <FormItem className="grow min-w-0" {...field}>
                 <FormControl>
                   <Input
                     className="border-[#A9A9C2] border rounded-full h-[46px] placeholder:text-[#B9B8BB] text-white px-5 rounded-r-none border-r-0"
@@ -33,7 +33,7 @@ export default function NewsletterForm() {
               </FormItem>
             )}
           />
-          <Button className="p-0 w-[46px] h-[46px] rounded-full rounded-l-none border border-primary">
+          <Button className="p-0 shrink-0 w-[46px] h-[46px] rounded-full rounded-l-none border border-primary">
             <IoMdSend size={20} />
           </Button>
         </div>

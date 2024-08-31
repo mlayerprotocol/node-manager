@@ -17,7 +17,7 @@ export function NavigationSheet({
 }: NavigationProps & { trigger?: React.ReactNode }) {
   return (
     <Sheet>
-      {trigger && <SheetTrigger>{trigger}</SheetTrigger>}
+      {trigger && <SheetTrigger asChild>{trigger}</SheetTrigger>}
       <SheetContent side="left" className="w-max p-0">
         <Navigation {...props} />
       </SheetContent>
