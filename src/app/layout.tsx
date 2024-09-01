@@ -10,8 +10,8 @@ import { Toaster } from "@/components/ui/sonner";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
-  title: "Mlayer - License Dashboard",
-  description: "Mlayer - License Dashboard",
+  title: "Mlayer MLStudio",
+  description: "Mlayer MLStudio license management dashboard",
 };
 
 export const runtime = "edge";
