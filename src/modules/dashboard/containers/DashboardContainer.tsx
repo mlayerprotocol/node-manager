@@ -102,7 +102,7 @@ export default function DashboardContainer() {
                 className="text-primary h-auto p-0 text-sm"
                 asChild
               >
-                <Link href="/purchase-license">Purchase license</Link>
+                <Link href="/license/purchase">Purchase license</Link>
               </Button>
 
               <Button
@@ -110,7 +110,7 @@ export default function DashboardContainer() {
                 className="text-primary h-auto p-0 text-sm"
                 asChild
               >
-                <Link href="/manage-license">Manage license</Link>
+                <Link href="/license/manage">Manage license</Link>
               </Button>
             </div>
             <div className="mt-7">
