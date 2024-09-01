@@ -40,7 +40,7 @@ export default function Header({ className, ...props }: HeaderProps) {
           </Button> */}
           <ConnectWalletButton
             buttonClassNames={{
-              disconnected: "rounded-full hidden lg:inline-flex",
+              disconnected: "rounded-full",
             }}
           />
 
