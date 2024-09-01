@@ -15,7 +15,7 @@ export default function Header({ className, ...props }: HeaderProps) {
     <div className="bg-layout relative">
       <header
         className={cn(
-          "pt-9 pb-5 px-7 flex items-center justify-between container mx-auto lg:mr-0 xl:pr-20",
+          "pt-7 md:pt-9 pb-4 md:pb-5 px-7 flex items-center justify-between container mx-auto lg:mr-0 xl:pr-20",
           className
         )}
         {...props}
@@ -28,6 +28,7 @@ export default function Header({ className, ...props }: HeaderProps) {
                 alt="MLStudio logo"
                 width={135.63}
                 height={44.88}
+                className="w-[90.42] h-[29.92] h- md:h-[44.88px] md:w-[135.63px]"
               />
               <span className="sr-only">MLStudio</span>
             </Link>
@@ -46,10 +47,10 @@ export default function Header({ className, ...props }: HeaderProps) {
           <NavigationSheet
             trigger={
               <Button
-                className="bg-[#1F1F2C] rounded-full w-12 h-12 p-0 lg:hidden"
+                className="bg-[#1F1F2C] rounded-full w-10 h-10 p-0 lg:hidden"
                 variant="ghost"
               >
-                <IoMdMenu size={24} />
+                <IoMdMenu size={18} />
               </Button>
             }
           />
