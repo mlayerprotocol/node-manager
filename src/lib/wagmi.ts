@@ -1,5 +1,5 @@
 import { cookieStorage, createStorage, createConfig, http } from "wagmi";
-import { mainnet, sepolia } from "wagmi/chains";
+import { base, baseSepolia } from "wagmi/chains";
 import { configurations } from "@/utils/configurations";
 
 if (!configurations.walletconnect.projectId) {
@@ -13,7 +13,7 @@ export const metadata = {
   icons: [`${configurations.app.url}/images/icon.png`],
 };
 
-const chains = [mainnet, sepolia] as const;
+const chains = [base, baseSepolia] as const;
 export const config = createConfig({
   chains,
   ssr: true,
@@ -21,7 +21,7 @@ export const config = createConfig({
     storage: cookieStorage,
   }),
   transports: {
-    [mainnet.id]: http(),
-    [sepolia.id]: http(),
+    [base.id]: http(),
+    [baseSepolia.id]: http(),
   },
 });
