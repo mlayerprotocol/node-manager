@@ -28,7 +28,7 @@ export default function RootLayout({
       <body
         className={cn(
           aeonikFont.variable,
-          "font-aeonik before:bg-node-texture before:absolute before:inset-0 relative before:bg-[length:861px_528px] before:opacity-[0.04] before:-z-10 w-full h-full"
+          "font-aeonik before:bg-node-texture before:fixed before:inset-0 relative before:bg-[length:861px_528px] before:opacity-[0.04] before:-z-10 w-full h-full"
         )}
       >
         <ClientWagmiProvider initialState={initialState}>
