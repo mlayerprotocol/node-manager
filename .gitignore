@@ -10,7 +10,7 @@
 /coverage
 
 # Contracts Codegen
-/contracts
+/contracts/generated.ts
 
 # next.js
 /.next/

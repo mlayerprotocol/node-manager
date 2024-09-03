@@ -2,6 +2,7 @@
 import React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { makeQueryClient } from "@/lib/query-client";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 let browserQueryClient: QueryClient;
 
@@ -23,6 +24,9 @@ export default function ClientQueryClientProvider({
 }: ClientQueryClientProviderProps) {
   const queryClient = getQueryClient();
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      {children}
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   );
 }

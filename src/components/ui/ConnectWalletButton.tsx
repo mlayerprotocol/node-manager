@@ -11,6 +11,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { LuWallet } from "react-icons/lu";
 import { IoMdLogOut } from "react-icons/io";
 import { toast } from "sonner";
+import { getQueryClient } from "@/contexts/ClientQueryClientProvider";
 
 export type ConnectWalletButtonProps = {
   buttonClassNames?: {
@@ -89,7 +90,12 @@ export default function ConnectWalletButton({
             variant="ghost"
             className="rounded-full shrink-0"
             size="icon"
-            onClick={() => disconnect()}
+            onClick={() => {
+              const queryClient = getQueryClient();
+              disconnect();
+              queryClient.clear();
+              toast.info("Wallet Disconnected");
+            }}
           >
             <IoMdLogOut className="h-5 w-5" />
             <span className="sr-only">Disconnect</span>

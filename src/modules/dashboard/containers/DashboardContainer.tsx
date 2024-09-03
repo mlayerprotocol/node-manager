@@ -206,6 +206,7 @@ export default function DashboardContainer() {
                             licenses.delegated,
                             licenses.total
                           ),
+                          fill: "var(--color-delegated)",
                         },
                         {
                           status: "pending",
@@ -213,6 +214,7 @@ export default function DashboardContainer() {
                             licenses.pending,
                             licenses.total
                           ),
+                          fill: "var(--color-pending)",
                         },
                       ]}
                       dataKey="percentage"
