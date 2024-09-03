@@ -38,6 +38,7 @@ import { toast } from "sonner";
 import { get } from "http";
 import { cn } from "@/lib/utils";
 import { getQueryClient } from "@/contexts/ClientQueryClientProvider";
+import { useQueryClient } from "@tanstack/react-query";
 
 type PurchaseFormPayload = {
   quantity: number;
@@ -288,6 +289,7 @@ function SentryLicensePurchaseForm() {
       enabled: isConnected,
     },
   });
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     setQuantity(watchedQuantity);
@@ -308,7 +310,6 @@ function SentryLicensePurchaseForm() {
           });
           form.reset();
 
-          const queryClient = getQueryClient();
           await queryClient.invalidateQueries({ queryKey });
           toast.success("Sentry license purchased successfully");
         }

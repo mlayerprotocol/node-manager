@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import {
   Dialog,
   DialogContent,
@@ -12,10 +11,22 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { IoMdInformationCircle } from "react-icons/io";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import {
+  useReadSubnetContractAddressInfo,
+  useWriteSentryNodeContractRegisterOperatorBytes,
+  useWriteValidatorNodeContractRegisterOperatorBytes,
+} from "@mlayer-contracts";
+import { Address } from "viem";
+import { useAccount } from "wagmi";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
-export type DelegateLicenseModalProps = DialogProps;
+export type DelegateLicenseModalProps = DialogProps & {
+  license?: { id: BigInt; type: "sentry" | "validator" };
+};
 
 export default function DelegateLicenseModal({
+  license,
   ...props
 }: DelegateLicenseModalProps) {
   const form = useForm({
@@ -23,21 +34,61 @@ export default function DelegateLicenseModal({
       hash: "",
     },
   });
-  const { control } = form;
+  const { control, handleSubmit } = form;
+  const { writeContractAsync: registerSentryOperator } =
+    useWriteSentryNodeContractRegisterOperatorBytes();
+  const { writeContractAsync: registerValidatorOperator } =
+    useWriteValidatorNodeContractRegisterOperatorBytes();
+  const { address, isConnected } = useAccount();
+  const { queryKey } = useReadSubnetContractAddressInfo({
+    args: address && [address],
+    query: {
+      enabled: isConnected,
+    },
+  });
+  const queryClient = useQueryClient();
+
+  const onSubmit = handleSubmit(async (data) => {
+    if (license?.type === "sentry") {
+      await registerSentryOperator({
+        args: [data.hash as Address, [BigInt(license.id.toString())]],
+      });
+    }
+
+    if (license?.type === "validator") {
+      await registerValidatorOperator({
+        args: [data.hash as Address, [BigInt(license.id.toString())]],
+      });
+    }
+    form.reset();
+    queryClient.invalidateQueries({ queryKey });
+    toast.success("License delegated successfully");
+    props.onOpenChange?.(false);
+  });
+
   return (
     <Dialog {...props}>
       <DialogContent className="py-7 px-14 bg-layout !rounded-2xl max-w-[476px]">
         <DialogHeader className="text-left">
-          <DialogTitle>Delegate Sentry License to A Node Operator</DialogTitle>
+          {license?.type === "sentry" && (
+            <DialogTitle>
+              Delegate Sentry License to A Node Operator
+            </DialogTitle>
+          )}
+          {license?.type === "validator" && (
+            <DialogTitle>
+              Delegate Validator License to A Node Operator
+            </DialogTitle>
+          )}
         </DialogHeader>
 
         <div>
           <Form {...form}>
-            <form method="POSt">
-              <div className="space-y-4 mt-[57px]">
+            <form method="POST" onSubmit={onSubmit}>
+              <div className="space-y-4 mt-5">
                 <div className="flex items-center gap-3 font-bold text-white">
                   <span>License ID:</span>
-                  <span>105</span>
+                  <span>{license?.id?.toString()}</span>
                 </div>
                 <div className="flex items-center gap-3 font-bold text-white">
                   <span>Delegate Hash</span>
@@ -46,6 +97,7 @@ export default function DelegateLicenseModal({
                 <FormField
                   control={control}
                   name="hash"
+                  rules={{ required: "This field is required" }}
                   render={({ field }) => (
                     <FormItem {...field}>
                       <FormControl>
@@ -59,7 +111,18 @@ export default function DelegateLicenseModal({
                 />
               </div>
 
-              <Button className="mt-[84px] flex rounded-full w-full">
+              <div className="pt-5 pb-16 min-h-[84px]">
+                {form.formState.errors.hash && (
+                  <p className="text-destructive ">
+                    {form.formState.errors.hash.message}
+                  </p>
+                )}
+              </div>
+
+              <Button
+                className="flex rounded-full w-full"
+                loading={form.formState.isSubmitting}
+              >
                 Delegate
               </Button>
             </form>

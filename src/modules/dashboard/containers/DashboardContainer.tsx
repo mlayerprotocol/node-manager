@@ -77,7 +77,7 @@ export default function DashboardContainer() {
     return getAddressInfo[2].reduce<{ total: 0; pending: 0; delegated: 0 }>(
       (acc, license) => {
         acc.total += 1;
-        if (Boolean(license.delegatedTo) && license.delegatedTo !== "0x") {
+        if (license.delegatedTo !== "0x") {
           acc.delegated += 1;
         } else {
           acc.pending += 1;
