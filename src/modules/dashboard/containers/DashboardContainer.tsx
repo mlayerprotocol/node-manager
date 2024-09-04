@@ -242,7 +242,13 @@ export default function DashboardContainer() {
                                   y={viewBox.cy}
                                   className="fill-foreground text-2xl font-bold"
                                 >
-                                  {licenses.delegated} | {licenses.pending}
+                                  <tspan fill={chartConfig.delegated.color}>
+                                    {licenses.delegated}
+                                  </tspan>{" "}
+                                  <tspan className="fill-white/10">|</tspan>{" "}
+                                  <tspan fill={chartConfig.pending.color}>
+                                    {licenses.pending}
+                                  </tspan>
                                 </tspan>
                               </text>
                             );
