@@ -21,6 +21,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ImSpinner } from "react-icons/im";
+import Decimal from "decimal.js";
 
 // const chartData = [
 //   { status: "delegated", percentage: 100, fill: "var(--color-delegated)" },
@@ -31,11 +32,11 @@ import { ImSpinner } from "react-icons/im";
 const chartConfig = {
   delegated: {
     label: "Delegated",
-    color: "#AEB9E1",
+    color: "#2F5ED2",
   },
   pending: {
     label: "Pending",
-    color: "#2F5ED2",
+    color: "#AEB9E1",
   },
   // free: {
   //   label: "Free",
@@ -105,8 +106,12 @@ export default function DashboardContainer() {
             <span className="text-white text-sm">
               (
               {key === "delegated"
-                ? getPercentage(licenses.delegated, licenses.total)
-                : getPercentage(licenses.pending, licenses.total)}
+                ? new Decimal(getPercentage(licenses.delegated, licenses.total))
+                    .toDP(2)
+                    .toString()
+                : new Decimal(getPercentage(licenses.pending, licenses.total))
+                    .toDP(2)
+                    .toString()}
               %)
             </span>
           </li>
@@ -237,7 +242,7 @@ export default function DashboardContainer() {
                                   y={viewBox.cy}
                                   className="fill-foreground text-2xl font-bold"
                                 >
-                                  100%
+                                  {licenses.delegated} | {licenses.pending}
                                 </tspan>
                               </text>
                             );
