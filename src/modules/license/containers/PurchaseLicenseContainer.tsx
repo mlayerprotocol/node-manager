@@ -70,6 +70,7 @@ function PurchaseForm({
   total: {
     value: number | string;
     loading: boolean;
+    error?: string;
   };
   onSubmit: (data: PurchaseFormPayload) => void;
 }) {
@@ -199,6 +200,13 @@ function PurchaseForm({
                 {isConnected ? (
                   total.loading ? (
                     <Skeleton className="justify-self-center h-4 w-40" />
+                  ) : total.error ? (
+                    <Badge
+                      className="justify-self-center"
+                      variant="destructive"
+                    >
+                      An error occurred while fetching total
+                    </Badge>
                   ) : (
                     <p className="text-white text-base font-bold justify-self-center">
                       {total.value} ETH
@@ -225,7 +233,8 @@ function PurchaseForm({
                 subTotal.loading ||
                 total.loading ||
                 !isConnected ||
-                balanceLoading
+                balanceLoading ||
+                Boolean(total.error)
               }
               loading={form.formState.isSubmitting}
             >
@@ -276,6 +285,7 @@ function SentryLicensePurchaseForm() {
   const {
     data: getLicensePriceTotal,
     isFetching: getLicensePriceTotalIsFetching,
+    error: getLicensePriceTotalError,
   } = useReadSentryLicenseContractLicensePrice({
     args: (quantity ?? promoCode) ? [BigInt(quantity), promoCode] : undefined,
     query: {
@@ -296,8 +306,8 @@ function SentryLicensePurchaseForm() {
   }, [watchedQuantity, setQuantity]);
 
   useEffect(() => {
-    setPromoCode(promoCode);
-  }, [promoCode, setPromoCode]);
+    setPromoCode(watchedPromoCode);
+  }, [watchedPromoCode, setPromoCode]);
 
   return (
     <PurchaseForm
@@ -328,6 +338,7 @@ function SentryLicensePurchaseForm() {
       total={{
         value: formatEther(BigInt(getLicensePriceTotal || 0)),
         loading: getLicensePriceTotalIsFetching,
+        error: getLicensePriceTotalError?.message,
       }}
     />
   );
@@ -371,6 +382,7 @@ function ValidatorLicensePurchaseForm() {
   const {
     data: getLicensePriceTotal,
     isFetching: getLicensePriceTotalIsFetching,
+    error: getLicensePriceTotalError,
   } = useReadValidatorLicenseContractLicensePrice({
     args: (quantity ?? promoCode) ? [BigInt(quantity), promoCode] : undefined,
     query: {
@@ -390,8 +402,8 @@ function ValidatorLicensePurchaseForm() {
   }, [watchedQuantity, setQuantity]);
 
   useEffect(() => {
-    setPromoCode(promoCode);
-  }, [promoCode, setPromoCode]);
+    setPromoCode(watchedPromoCode);
+  }, [watchedPromoCode, setPromoCode]);
 
   return (
     <PurchaseForm
@@ -423,6 +435,7 @@ function ValidatorLicensePurchaseForm() {
       total={{
         value: formatEther(BigInt(getLicensePriceTotal || 0)),
         loading: getLicensePriceTotalIsFetching,
+        error: getLicensePriceTotalError?.message,
       }}
     />
   );
