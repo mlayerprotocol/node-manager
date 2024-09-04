@@ -37,6 +37,7 @@ import {
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { FaRegCopy } from "react-icons/fa6";
 
 const PAGE_SIZE = 10;
 
@@ -154,13 +155,23 @@ export default function ManageLicenseContainer() {
                     <CopyToClipboard
                       text={licenseInfo.delegatedTo.replace("0x", "")}
                       onCopy={() => {
-                        toast.info("Operator ID copied successfully");
+                        toast.info("Operator ID copied successfully", {
+                          position: "top-center",
+                        });
                       }}
                     >
-                      <Button className="p-0 h-auto" variant="link">
-                        {licenseInfo.delegatedTo.replace("0x", "").slice(0, 4)}
-                        ...
-                        {licenseInfo.delegatedTo.replace("0x", "").slice(-4)}
+                      <Button
+                        className="p-0 h-auto !no-underline text-white"
+                        variant="link"
+                      >
+                        <span>
+                          {licenseInfo.delegatedTo
+                            .replace("0x", "")
+                            .slice(0, 4)}
+                          ...
+                          {licenseInfo.delegatedTo.replace("0x", "").slice(-4)}
+                        </span>
+                        <FaRegCopy className="ml-2" size={16} />
                       </Button>
                     </CopyToClipboard>
                   ) : (
