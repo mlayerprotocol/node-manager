@@ -35,6 +35,7 @@
     "next-themes": "^0.3.0",
     "rc-pagination": "^4.2.0",
     "react": "^18",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-currency-input-field": "^3.8.0",
     "react-dom": "^18",
     "react-hook-form": "^7.53.0",
@@ -50,6 +51,7 @@
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
+    "@types/react-copy-to-clipboard": "^5.0.7",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.7",

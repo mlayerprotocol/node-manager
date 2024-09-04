@@ -36,6 +36,7 @@ import {
 } from "@/components/ui/popover";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const PAGE_SIZE = 10;
 
@@ -149,7 +150,22 @@ export default function ManageLicenseContainer() {
                 {data.cycleDelegated ?? "-"}
               </TableCell> */}
                 <TableCell className="text-center">
-                  {licenseInfo.delegatedTo.replace("0x", "") || "-"}
+                  {licenseInfo.delegatedTo.replace("0x", "") ? (
+                    <CopyToClipboard
+                      text={licenseInfo.delegatedTo.replace("0x", "")}
+                      onCopy={() => {
+                        toast.info("Operator ID copied successfully");
+                      }}
+                    >
+                      <Button className="p-0 h-auto" variant="link">
+                        {licenseInfo.delegatedTo.replace("0x", "").slice(0, 4)}
+                        ...
+                        {licenseInfo.delegatedTo.replace("0x", "").slice(-4)}
+                      </Button>
+                    </CopyToClipboard>
+                  ) : (
+                    "-"
+                  )}
                 </TableCell>
                 <TableCell className="text-center">
                   {licenseInfo.earned || "-"}
