@@ -38,7 +38,7 @@ export default function Footer({ className, ...props }: FooterProps) {
                   asChild
                 >
                   <a
-                    href="https://x.com"
+                    href="https://x.com/mlayerprotocol"
                     target="_blank"
                     rel="nofollow noopener"
                   >
@@ -53,7 +53,7 @@ export default function Footer({ className, ...props }: FooterProps) {
                   asChild
                 >
                   <a
-                    href="https://discord.com"
+                    href="https://discord.gg/QazYZYBqus"
                     target="_blank"
                     rel="nofollow noopener"
                   >
@@ -68,7 +68,7 @@ export default function Footer({ className, ...props }: FooterProps) {
                   asChild
                 >
                   <a
-                    href="https://github.com"
+                    href="https://github.com/mlayerprotocol"
                     target="_blank"
                     rel="nofollow noopener"
                   >
@@ -97,7 +97,9 @@ export default function Footer({ className, ...props }: FooterProps) {
                 variant="link"
                 asChild
               >
-                <a href="#">Whitepaper</a>
+                <a target="_blank" href="https://mlayer.gitbook.io/white-paper">
+                  Whitepaper
+                </a>
               </Button>
             </li>
             <li>
@@ -106,7 +108,12 @@ export default function Footer({ className, ...props }: FooterProps) {
                 variant="link"
                 asChild
               >
-                <a href="#">Documentation</a>
+                <a
+                  target="_blank"
+                  href="https://mlayer.gitbook.io/introduction"
+                >
+                  Documentation
+                </a>
               </Button>
             </li>
           </ul>
@@ -122,7 +129,7 @@ export default function Footer({ className, ...props }: FooterProps) {
                 asChild
               >
                 <a
-                  href="https://github.com"
+                  href="https://github.com/mlayerprotocol"
                   target="_blank"
                   rel="nofollow noopener"
                 >
@@ -136,7 +143,11 @@ export default function Footer({ className, ...props }: FooterProps) {
                 variant="link"
                 asChild
               >
-                <a href="https://x.com" target="_blank" rel="nofollow noopener">
+                <a
+                  href="https://x.com/mlayerprotocol"
+                  target="_blank"
+                  rel="nofollow noopener"
+                >
                   X (formerly Twitter)
                 </a>
               </Button>
@@ -148,7 +159,7 @@ export default function Footer({ className, ...props }: FooterProps) {
                 asChild
               >
                 <a
-                  href="https://discord.com"
+                  href="https://discord.gg/QazYZYBqus"
                   target="_blank"
                   rel="nofollow noopener"
                 >
