@@ -34,7 +34,7 @@ export default function RootLayout({
         <ClientWagmiProvider initialState={initialState}>
           <DashboardLayout>{children}</DashboardLayout>
         </ClientWagmiProvider>
-        <Toaster position="top-right" />
+        <Toaster position="bottom-right" />
       </body>
     </html>
   );

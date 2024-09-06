@@ -1,5 +1,6 @@
 import { MutationCache, QueryCache, QueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { BaseError } from "viem";
 
 export function makeQueryClient() {
   return new QueryClient({
@@ -9,9 +10,14 @@ export function makeQueryClient() {
         if (typeof window === "undefined") {
           return;
         }
-        toast.error(error.message, {
-          duration: 5000,
-        });
+        toast.error(
+          error instanceof BaseError
+            ? error.shortMessage || error.message
+            : error.message,
+          {
+            duration: 5000,
+          }
+        );
       },
     }),
     mutationCache: new MutationCache({
@@ -20,9 +26,14 @@ export function makeQueryClient() {
         if (typeof window === "undefined") {
           return;
         }
-        toast.error(error.message, {
-          duration: 5000,
-        });
+        toast.error(
+          error instanceof BaseError
+            ? error.shortMessage || error.message
+            : error.message,
+          {
+            duration: 5000,
+          }
+        );
       },
     }),
   });
