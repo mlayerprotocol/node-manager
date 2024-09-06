@@ -11,7 +11,7 @@ export type ClientWagmiProviderProps = {
   initialState?: State;
 };
 
-const web3ModalConfig = defaultWagmiConfig({
+export const web3ModalConfig = defaultWagmiConfig({
   metadata,
   chains: config.chains,
   projectId: configurations.walletconnect.projectId,

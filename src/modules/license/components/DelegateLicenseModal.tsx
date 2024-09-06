@@ -18,8 +18,8 @@ import {
 } from "@mlayer-contracts";
 import { Address } from "viem";
 import { useAccount } from "wagmi";
-import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import useInvalidateQueryKeysOnConfirmTransaction from "@/hooks/useInvalidateQueryKeysOnConfirmTransaction";
 
 export type DelegateLicenseModalProps = DialogProps & {
   license?: { id: BigInt; type: "sentry" | "validator" };
@@ -35,18 +35,31 @@ export default function DelegateLicenseModal({
     },
   });
   const { control, handleSubmit } = form;
-  const { writeContractAsync: registerSentryOperator } =
-    useWriteSentryNodeContractRegisterOperatorBytes();
-  const { writeContractAsync: registerValidatorOperator } =
-    useWriteValidatorNodeContractRegisterOperatorBytes();
+  const {
+    writeContractAsync: registerSentryOperator,
+    data: registerSentryOperatorData,
+  } = useWriteSentryNodeContractRegisterOperatorBytes();
+  const {
+    writeContractAsync: registerValidatorOperator,
+    data: registerValidatorOperatorData,
+  } = useWriteValidatorNodeContractRegisterOperatorBytes();
   const { address, isConnected } = useAccount();
-  const { queryKey } = useReadSubnetContractAddressInfo({
-    args: address && [address],
-    query: {
-      enabled: isConnected,
-    },
+  const { queryKey: getAddressInfoQueryKey } = useReadSubnetContractAddressInfo(
+    {
+      args: address && [address],
+      query: {
+        enabled: isConnected,
+      },
+    }
+  );
+  useInvalidateQueryKeysOnConfirmTransaction({
+    queryKeys: [getAddressInfoQueryKey],
+    hash: registerSentryOperatorData,
   });
-  const queryClient = useQueryClient();
+  useInvalidateQueryKeysOnConfirmTransaction({
+    queryKeys: [getAddressInfoQueryKey],
+    hash: registerValidatorOperatorData,
+  });
 
   const onSubmit = handleSubmit(async (data) => {
     if (license?.type === "sentry") {
@@ -61,7 +74,6 @@ export default function DelegateLicenseModal({
       });
     }
     form.reset();
-    queryClient.invalidateQueries({ queryKey });
     toast.success("License delegated successfully");
     props.onOpenChange?.(false);
   });

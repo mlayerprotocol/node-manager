@@ -35,9 +35,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { toast } from "sonner";
-import { useQueryClient } from "@tanstack/react-query";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { FaRegCopy } from "react-icons/fa6";
+import useInvalidateQueryKeysOnConfirmTransaction from "@/hooks/useInvalidateQueryKeysOnConfirmTransaction";
 
 const PAGE_SIZE = 10;
 
@@ -49,7 +49,7 @@ export default function ManageLicenseContainer() {
   const {
     data: getAddressInfo,
     isLoading: getAddressInfoIsLoading,
-    queryKey,
+    queryKey: getAddressInfoQueryKey,
   } = useReadSubnetContractAddressInfo({
     args: address && [address],
     query: {
@@ -62,12 +62,22 @@ export default function ManageLicenseContainer() {
   const {
     writeContract: deRegisterSentryOperator,
     isPending: deRegisterSentryOperatorIsPending,
+    data: deRegisterSentryOperatorData,
   } = useWriteSentryNodeContractDeRegisterNodeOperator();
   const {
     writeContract: deRegisterValidatorOperator,
     isPending: deRegisterValidatorOperatorIsPending,
+    data: deRegisterValidatorOperatorData,
   } = useWriteValidatorNodeContractDeRegisterNodeOperator();
-  const queryClient = useQueryClient();
+
+  useInvalidateQueryKeysOnConfirmTransaction({
+    hash: deRegisterSentryOperatorData,
+    queryKeys: [getAddressInfoQueryKey],
+  });
+  useInvalidateQueryKeysOnConfirmTransaction({
+    hash: deRegisterValidatorOperatorData,
+    queryKeys: [getAddressInfoQueryKey],
+  });
 
   return (
     <main className="px-5 py-10 md:px-20 md:py-20 container mx-auto">
@@ -227,9 +237,6 @@ export default function ManageLicenseContainer() {
                                         toast.success(
                                           "License undelegated successfully"
                                         );
-                                        queryClient.invalidateQueries({
-                                          queryKey,
-                                        });
                                         setUndelegatePopoverOpen(false);
                                       },
                                     }
@@ -246,9 +253,6 @@ export default function ManageLicenseContainer() {
                                         toast.success(
                                           "License undelegated successfully"
                                         );
-                                        queryClient.invalidateQueries({
-                                          queryKey,
-                                        });
                                         setUndelegatePopoverOpen(false);
                                       },
                                     }

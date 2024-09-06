@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useForm, UseFormReturn } from "react-hook-form";
@@ -28,17 +28,14 @@ import {
   useReadSubnetContractAddressInfo,
   useReadValidatorLicenseContractLicensePrice,
   useWriteSentryNodeContractPurchaseLicense,
-  useWriteSentryNodeContractPurchaseLicenseFor,
   useWriteValidatorNodeContractPurchaseLicense,
 } from "@mlayer-contracts";
 import { useDebounce } from "@react-hook/debounce";
 import { formatEther } from "viem";
 import Decimal from "decimal.js";
 import { toast } from "sonner";
-import { get } from "http";
 import { cn } from "@/lib/utils";
-import { getQueryClient } from "@/contexts/ClientQueryClientProvider";
-import { useQueryClient } from "@tanstack/react-query";
+import useInvalidateQueryKeysOnConfirmTransaction from "@/hooks/useInvalidateQueryKeysOnConfirmTransaction";
 
 type PurchaseFormPayload = {
   quantity: number;
@@ -292,14 +289,21 @@ function SentryLicensePurchaseForm() {
       enabled: isConnected && quantity > 0,
     },
   });
-  const { writeContractAsync } = useWriteSentryNodeContractPurchaseLicense();
-  const { queryKey } = useReadSubnetContractAddressInfo({
-    args: address && [address],
-    query: {
-      enabled: isConnected,
-    },
+  const { writeContractAsync, data: writeContractAsyncData } =
+    useWriteSentryNodeContractPurchaseLicense();
+  const { queryKey: getAddressInfoQueryKey } = useReadSubnetContractAddressInfo(
+    {
+      args: address && [address],
+      query: {
+        enabled: isConnected,
+      },
+    }
+  );
+
+  useInvalidateQueryKeysOnConfirmTransaction({
+    hash: writeContractAsyncData,
+    queryKeys: [getAddressInfoQueryKey],
   });
-  const queryClient = useQueryClient();
 
   useEffect(() => {
     setQuantity(watchedQuantity);
@@ -319,8 +323,6 @@ function SentryLicensePurchaseForm() {
             value: getLicensePriceTotal,
           });
           form.reset();
-
-          await queryClient.invalidateQueries({ queryKey });
           toast.success("Sentry license purchased successfully");
         }
       }}
@@ -389,12 +391,19 @@ function ValidatorLicensePurchaseForm() {
       enabled: isConnected && quantity > 0,
     },
   });
-  const { writeContractAsync } = useWriteValidatorNodeContractPurchaseLicense();
-  const { queryKey } = useReadSubnetContractAddressInfo({
-    args: address && [address],
-    query: {
-      enabled: isConnected,
-    },
+  const { writeContractAsync, data: writeContractAsyncData } =
+    useWriteValidatorNodeContractPurchaseLicense();
+  const { queryKey: getAddressInfoQueryKey } = useReadSubnetContractAddressInfo(
+    {
+      args: address && [address],
+      query: {
+        enabled: isConnected,
+      },
+    }
+  );
+  useInvalidateQueryKeysOnConfirmTransaction({
+    hash: writeContractAsyncData,
+    queryKeys: [getAddressInfoQueryKey],
   });
 
   useEffect(() => {
@@ -416,8 +425,6 @@ function ValidatorLicensePurchaseForm() {
           });
           form.reset();
 
-          const queryClient = getQueryClient();
-          await queryClient.invalidateQueries({ queryKey });
           toast.success("Validator license purchased successfully");
         }
       }}
