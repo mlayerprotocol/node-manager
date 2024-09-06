@@ -8,6 +8,7 @@ import { headers } from "next/headers";
 import ClientWagmiProvider from "@/contexts/ClientWagmiProvider";
 import { Toaster } from "@/components/ui/sonner";
 import "@/styles/globals.css";
+import ConnectWalletGuard from "@/components/HOC/ConnectWalletGuard";
 
 export const metadata: Metadata = {
   title: "Mlayer MLStudio",
@@ -32,7 +33,9 @@ export default function RootLayout({
         )}
       >
         <ClientWagmiProvider initialState={initialState}>
-          <DashboardLayout>{children}</DashboardLayout>
+          <DashboardLayout>
+            <ConnectWalletGuard>{children}</ConnectWalletGuard>
+          </DashboardLayout>
         </ClientWagmiProvider>
         <Toaster position="bottom-right" />
       </body>
