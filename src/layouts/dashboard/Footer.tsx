@@ -23,9 +23,9 @@ export default function Footer({ className, ...props }: FooterProps) {
             <span className="inline-flex flex-col items-end">
               <Image
                 src={logoImage}
-                alt="MLStudio logo"
-                width={135.63}
-                height={44.88}
+                alt="mlayer logo"
+                width={45}
+                height={45}
               />
               <span className="text-[#B9B8BB] text-sm">by Fero Tech</span>
             </span>

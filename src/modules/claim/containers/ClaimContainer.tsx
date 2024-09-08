@@ -17,8 +17,8 @@ export default function ClaimContainer() {
             size={20}
           />
           <p className="bg-layout py-3 px-4 text-white text-sm rounded relative leading-5 before:hidden lg:before:block before:absolute before:top-1/2 before:-translate-y-1/2 before:-left-5 before:w-0 before:h-0 before:border-[10px] before:border-r-layout before:border-transparent">
-            Please note that <span className="font-bold">xMSG</span> has waiting
-            periods to redeem for <span className="font-bold">MSG</span>. More
+            Please note that <span className="font-bold">xMLT</span> has waiting
+            periods to redeem for <span className="font-bold">MLT</span>. More
             information can be found{" "}
             <Button className="text-primary p-0 h-auto" variant="link" asChild>
               <a href="#">here</a>
@@ -56,7 +56,7 @@ export default function ClaimContainer() {
                   height={30}
                   className="-rotate-[35deg]"
                 />
-                <strong className="text-xl text-white font-bold">MSG</strong>
+                <strong className="text-xl text-white font-bold">MLT</strong>
               </div>
             </div>
           </div>
@@ -80,9 +80,10 @@ export default function ClaimContainer() {
                   src={iconImage}
                   alt=""
                   height={30}
-                  className="-rotate-[35deg]"
+                  style={{filter: 'grayscale(1)' }}
+                  className="-rotate-[35deg] "
                 />
-                <strong className="text-xl text-white font-bold">xMSG</strong>
+                <strong className="text-xl text-white font-bold">xMLT</strong>
               </div>
             </div>
           </div>

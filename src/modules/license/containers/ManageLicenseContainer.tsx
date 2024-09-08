@@ -97,7 +97,7 @@ export default function ManageLicenseContainer() {
               Operator Id
             </TableHead>
             <TableHead className="font-bold text-sm text-[#AEB9E1] py-4 text-center border border-[#28303F] border-x-0 whitespace-nowrap">
-              MSG Earned
+              MLT Earned
             </TableHead>
             <TableHead className="font-bold text-sm text-[#AEB9E1] py-4 text-center border border-[#28303F] border-l-0 rounded-tr-lg">
               Operation

@@ -124,7 +124,7 @@ export default function DashboardContainer() {
     <main className="px-5 py-10 md:px-20 md:py-20 container mx-auto">
       <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-8">
         <StatCard
-          title="xMSG Earned"
+          title="xMLT Earned"
           value={`${getAddressInfo?.[0] || 0}`}
           meta={{
             title: "Previous Cycle",
@@ -139,7 +139,7 @@ export default function DashboardContainer() {
         />
 
         <StatCard
-          title="xMSG Accrued"
+          title="xMLT Accrued"
           value={`${getAddressInfo?.[1] || 0}`}
           meta={{
             title: "Current Cycle",
@@ -154,7 +154,7 @@ export default function DashboardContainer() {
         />
 
         <StatCard
-          title="xMSG Claimable"
+          title="xMLT Claimable"
           value={`${getAddressInfo?.[3] || 0}`}
           icon={<FaWallet size={20} />}
           loading={getAddressInfoIsLoading}

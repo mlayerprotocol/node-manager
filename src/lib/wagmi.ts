@@ -7,8 +7,8 @@ if (!configurations.walletconnect.projectId) {
 }
 
 export const metadata = {
-  name: "MLStudio",
-  description: "Mlayer MLStudio",
+  name: 'NodeManager',
+  description: 'mlayer node manager',
   url: configurations.app.url,
   icons: [`${configurations.app.url}/images/icon.png`],
 };

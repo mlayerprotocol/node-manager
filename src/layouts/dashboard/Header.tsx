@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import logoImage from "@/assets/images/logo.png";
-import logoIconImage from "../../../public/images/icon.png";
+import logoIconImage from "../../../public/images/logo.png";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -22,23 +22,23 @@ export default function Header({ className, ...props }: HeaderProps) {
         {...props}
       >
         <div>
-          <h1 className="lg:absolute lg:left-[29px] lg:top-[38px]">
+          <h1 className="lg:absolute lg:left-[29px] lg:top-[38px] text-nowrap">
             <Link href="/">
               <Image
                 src={logoImage}
-                alt="MLStudio logo"
-                width={135.63}
-                height={44.88}
+                alt="mLayer"
+                width={40}
+                height={40}
                 className="hidden md:inline-block"
               />
               <Image
                 src={logoIconImage}
-                alt="MLStudio logo"
+                alt="mLayer"
                 width={48}
                 height={48}
                 className="md:hidden"
               />
-              <span className="sr-only">MLStudio</span>
+              <span className="text-xl font-bold">ml</span>/<span className=" text-xl">node manager</span>
             </Link>
           </h1>
         </div>

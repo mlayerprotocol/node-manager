@@ -36,6 +36,7 @@ import Decimal from "decimal.js";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import useInvalidateQueryKeysOnConfirmTransaction from "@/hooks/useInvalidateQueryKeysOnConfirmTransaction";
+import { configurations } from "@/utils/configurations";
 
 type PurchaseFormPayload = {
   quantity: number;
@@ -453,6 +454,7 @@ export default function PurchaseLicenseContainer() {
   const typeParams = searchParams.get("type");
   const activeTab = typeParams === "validator" ? "validator" : "sentry";
   const { address, isConnected } = useAccount();
+
   const { data: getAddressInfo, isLoading: getAddressInfoIsLoading } =
     useReadSubnetContractAddressInfo({
       args: address && [address],

@@ -11,8 +11,8 @@ import "@/styles/globals.css";
 import ConnectWalletGuard from "@/components/HOC/ConnectWalletGuard";
 
 export const metadata: Metadata = {
-  title: "Mlayer MLStudio",
-  description: "Mlayer MLStudio license management dashboard",
+  title: "mLayer Node Manager",
+  description: "Purchase and manage mLayer validator and sentry nodes",
 };
 
 export const runtime = "edge";
@@ -26,6 +26,10 @@ export default function RootLayout({
 
   return (
     <html lang="en" className="w-full h-full dark">
+        <head>
+     <link rel="icon" href="/favicon.png" type="image/png" />
+  </head>
+   
       <body
         className={cn(
           aeonikFont.variable,
