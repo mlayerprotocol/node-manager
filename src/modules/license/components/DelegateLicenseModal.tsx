@@ -62,9 +62,13 @@ export default function DelegateLicenseModal({
   });
 
   const onSubmit = handleSubmit(async (data) => {
+    if (data.hash == '') {
+      return
+    }
+    let hash = data.hash.startsWith("0x") ? data.hash : "0x" + data.hash;
     if (license?.type === "sentry") {
       await registerSentryOperator({
-        args: [data.hash as Address, [BigInt(license.id.toString())]],
+        args: [hash as Address, [BigInt(license.id.toString())]],
       });
     }
 
