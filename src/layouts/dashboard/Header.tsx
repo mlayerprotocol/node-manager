@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import logoImage from "@/assets/images/logo.png";
-import logoIconImage from "../../../public/images/logo.png";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -23,22 +22,15 @@ export default function Header({ className, ...props }: HeaderProps) {
       >
         <div>
           <h1 className="lg:absolute lg:left-[29px] lg:top-[38px] text-nowrap">
-            <Link href="/">
-              <Image
-                src={logoImage}
-                alt="mLayer"
-                width={40}
-                height={40}
-                className="hidden md:inline-block"
-              />
-              <Image
-                src={logoIconImage}
-                alt="mLayer"
-                width={48}
-                height={48}
-                className="md:hidden"
-              />
-              <span className="text-xl font-bold">ml</span>/<span className=" text-xl">node manager</span>
+            <Link
+              href="/"
+              className="flex flex-col md:gap-2 md:items-center md:flex-row"
+            >
+              <Image src={logoImage} alt="mLayer" width={40} height={40} />
+              <span>
+                <span className="md:text-xl font-bold">ml</span>/
+                <span className=" md:text-xl">node manager</span>
+              </span>
             </Link>
           </h1>
         </div>
