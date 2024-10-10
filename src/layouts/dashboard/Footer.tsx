@@ -20,13 +20,8 @@ export default function Footer({ className, ...props }: FooterProps) {
       >
         <div>
           <div className="flex md:flex-col gap-5 lg:gap-10 items-center md:items-start justify-between lg:absolute lg:left-[29px]">
-            <span className="inline-flex flex-col items-end">
-              <Image
-                src={logoImage}
-                alt="mlayer logo"
-                width={45}
-                height={45}
-              />
+            <span className="inline-flex flex-col">
+              <Image src={logoImage} alt="mlayer logo" width={45} height={45} />
               <span className="text-[#B9B8BB] text-sm">by Fero Tech</span>
             </span>
 
