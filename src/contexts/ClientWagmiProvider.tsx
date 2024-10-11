@@ -15,8 +15,8 @@ export const web3ModalConfig = defaultWagmiConfig({
   metadata,
   chains: config.chains,
   projectId: configurations.walletconnect.projectId,
-  ssr: true,
-  storage: config.storage,
+  //ssr: true,
+ storage: config.storage,
 });
 
 createWeb3Modal({

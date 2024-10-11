@@ -28,7 +28,8 @@ export default function ConnectWalletGuard({
               </p>
             </div>
             <Button
-              className="rounded-full px-6 py-3 text-lg font-medium text-white shadow-md hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+              shape="round"
+              className=" px-6 py-3 text-lg font-medium text-white shadow-md hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
               onClick={() =>
                 open().catch((err) => {
                   console.error("Failed to connect wallet", err);
