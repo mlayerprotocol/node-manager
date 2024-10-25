@@ -15,7 +15,7 @@ createAppKit({
   adapters: [wagmiAdapter],
   networks,
   metadata,
-  projectId: configurations.walletconnect.projectId,
+  projectId: configurations.reown.projectId,
   features: {
     analytics: false,
   },

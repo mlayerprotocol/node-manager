@@ -4,7 +4,7 @@ export const configurations = {
   app: {
     url: `${process.env.NEXT_PUBLIC_APP_URL || ""}`,
   },
-  walletconnect: {
+  reown: {
     projectId: `${process.env.NEXT_PUBLIC_REOWN_PROJECT_ID || ""}`,
   },
   contracts: {
