@@ -3,7 +3,7 @@ import { aeonikFont } from "@/theme/font";
 import { cn } from "@/lib/utils";
 import DashboardLayout from "@/layouts/dashboard/DashboardLayout";
 import { cookieToInitialState } from "wagmi";
-import { config } from "@/lib/wagmi";
+import { wagmiAdapter } from "@/lib/wagmi";
 import { headers } from "next/headers";
 import ClientWagmiProvider from "@/contexts/ClientWagmiProvider";
 import { Toaster } from "@/components/ui/sonner";
@@ -15,21 +15,22 @@ export const metadata: Metadata = {
   description: "Purchase and manage mLayer validator and sentry nodes",
 };
 
-export const runtime = "edge";
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const initialState = cookieToInitialState(config, headers().get("cookie"));
+  const initialState = cookieToInitialState(
+    wagmiAdapter.wagmiConfig,
+    headers().get("cookie")
+  );
 
   return (
     <html lang="en" className="w-full h-full dark">
-        <head>
-     <link rel="icon" href="/favicon.png" type="image/png" />
-  </head>
-   
+      <head>
+        <link rel="icon" href="/favicon.png" type="image/png" />
+      </head>
+
       <body
         className={cn(
           aeonikFont.variable,

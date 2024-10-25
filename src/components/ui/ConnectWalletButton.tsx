@@ -1,7 +1,6 @@
 "use client";
 import React, { useMemo } from "react";
 import { useAccount, useDisconnect } from "wagmi";
-import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { Button } from "./button";
 import { Avatar, AvatarImage } from "./avatar";
 import { cn } from "../../lib/utils";
@@ -12,6 +11,7 @@ import { LuWallet } from "react-icons/lu";
 import { IoMdLogOut } from "react-icons/io";
 import { toast } from "sonner";
 import { getQueryClient } from "@/contexts/ClientQueryClientProvider";
+import { useAppKit } from "@reown/appkit/react";
 
 export type ConnectWalletButtonProps = {
   buttonClassNames?: {
@@ -22,7 +22,7 @@ export type ConnectWalletButtonProps = {
 export default function ConnectWalletButton({
   buttonClassNames,
 }: ConnectWalletButtonProps) {
-  const { open } = useWeb3Modal();
+  const { open } = useAppKit();
   const { disconnect } = useDisconnect();
   const { isConnected, address, isConnecting } = useAccount();
 

@@ -3,7 +3,7 @@ import React from "react";
 import { useAccount } from "wagmi";
 import { Card, CardContent } from "../ui/card";
 import { Button } from "../ui/button";
-import { useWeb3Modal } from "@web3modal/wagmi/react";
+import { useAppKit } from "@reown/appkit/react";
 import { toast } from "sonner";
 
 export default function ConnectWalletGuard({
@@ -12,7 +12,7 @@ export default function ConnectWalletGuard({
   children: React.ReactNode;
 }) {
   const { isConnected } = useAccount();
-  const { open } = useWeb3Modal();
+  const { open } = useAppKit();
 
   if (!isConnected) {
     return (

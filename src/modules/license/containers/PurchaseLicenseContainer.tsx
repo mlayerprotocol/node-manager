@@ -36,7 +36,6 @@ import Decimal from "decimal.js";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import useInvalidateQueryKeysOnConfirmTransaction from "@/hooks/useInvalidateQueryKeysOnConfirmTransaction";
-import { configurations } from "@/utils/configurations";
 
 type PurchaseFormPayload = {
   quantity: number;
