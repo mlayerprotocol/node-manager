@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useWaitForTransactionReceipt } from "wagmi";
 import { Address, WaitForTransactionReceiptParameters } from "viem";
 import { toast } from "sonner";
@@ -8,11 +8,13 @@ export type useOnConfirmTransactionProps = Omit<
   WaitForTransactionReceiptParameters,
   "hash"
 > & {
+  message?: string;
   onConfirm: () => void;
   hash?: Address;
 };
 
 export default function useOnConfirmTransaction({
+  message,
   onConfirm,
   hash,
   ...props
@@ -34,9 +36,15 @@ export default function useOnConfirmTransaction({
         duration: 0,
       });
     } else {
-      toast.dismiss("confirm-transaction");
+      if (message) {
+        toast.success(message, {
+          id: "confirm-transaction",
+        });
+      } else {
+        toast.dismiss("confirm-transaction");
+      }
     }
-  }, [isFetching]);
+  }, [isFetching, message]);
 
   useEffect(() => {
     if (isSuccess) {

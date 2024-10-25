@@ -14,6 +14,7 @@ export type ClientWagmiProviderProps = {
 createAppKit({
   adapters: [wagmiAdapter],
   networks,
+  defaultNetwork: networks[0],
   metadata,
   projectId: configurations.reown.projectId,
   features: {

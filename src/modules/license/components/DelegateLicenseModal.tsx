@@ -62,8 +62,8 @@ export default function DelegateLicenseModal({
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    if (data.hash == '') {
-      return
+    if (data.hash == "") {
+      return;
     }
     let hash = data.hash.startsWith("0x") ? data.hash : "0x" + data.hash;
     if (license?.type === "sentry") {

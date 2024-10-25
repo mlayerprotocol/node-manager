@@ -1,7 +1,15 @@
-import { cookieStorage, createStorage, createConfig, http } from "wagmi";
+import {
+  cookieStorage,
+  createStorage,
+  createConfig,
+  http,
+  fallback,
+  unstable_connector,
+} from "wagmi";
 import { configurations } from "@/utils/configurations";
 import { AppKitNetwork, base, baseSepolia } from "@reown/appkit/networks";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
+import { injected } from "@wagmi/connectors";
 
 if (!configurations.reown.projectId) {
   throw new Error("Project ID is not defined");
@@ -26,4 +34,9 @@ export const wagmiAdapter = new WagmiAdapter({
   storage: createStorage({
     storage: cookieStorage,
   }),
+  connectors: [injected()],
+  transports: {
+    [baseSepolia.id]: fallback([unstable_connector(injected), http()]),
+    [base.id]: fallback([unstable_connector(injected), http()]),
+  },
 });

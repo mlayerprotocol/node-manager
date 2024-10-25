@@ -17,12 +17,14 @@ export default function useInvalidateQueryKeysOnConfirmTransaction({
   ...props
 }: useInvalidateQueryKeysOnConfirmTransactionProps) {
   const queryClient = useQueryClient();
+  const onConfirm = useCallback(() => {
+    queryKeys.map((query) =>
+      queryClient.invalidateQueries({ queryKey: query })
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [queryClient]);
   return useOnConfirmTransaction({
     ...props,
-    onConfirm: useCallback(() => {
-      queryKeys.map((query) =>
-        queryClient.invalidateQueries({ queryKey: query })
-      );
-    }, [queryKeys, queryClient]),
+    onConfirm,
   });
 }
